@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 5 - Arrays e Objetos </title>
+</head>
+<body>
+    <script>
+        let cores = ['vermelho', 'verde', 'azul', 'amarelo']
+
+        cores.push('preto')
+        cores.unshift('rosa') //add esse indice no comeco da array
+        console.log(cores)
+
+        let ultima = cores.pop() //guarda o ultimo indice da array em uma variavel
+        let primeira = cores.shift() //guarda o primeiro indice da array numa variavel
+
+        console.log(primeira, ultima)
+        console.log(cores[cores.length - 1])
+        console.log(cores)
+
+        let cores2 = ['mgenta', 'ciano','laranja']
+
+        let todas = [...cores, ...cores2] //junta as duas arrays
+        console.log(todas)
+
+        let numeros = [2, 6, 9]
+        function soma(a, b, c){
+            console.log(a + b + c)
+        }
+                let numeros: number[]
+        soma(...numeros)
+    </script>
+    <div id="conteudo"> </div>
+    <script src="script.js"></script>
+</body>
+</html>
