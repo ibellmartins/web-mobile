@@ -35,11 +35,12 @@ console.log("binário para inteiro: " + resultBinario);
 function linguaP(frase){
     let palavra = frase.split(" ")
     var fraseP = ""
-    for (var i = 0; i < frase.length; i++){
+    for (var i = 0; i < palavra.length; i++){
             fraseP += "P" + palavra[i] + " ";
         }
        console.log(fraseP)
 }
+
 let res = "Eu gosto do Mackenzie";
 linguaP(res);
 
@@ -73,45 +74,59 @@ console.log(result);
 
 //6 - escreva um algoritmo que receba uma string com os numeros de um CPF e retorne se ele é válido ou não. 
 function validarCPF(cpf){
-    let cpfnum = cpf.replace(/\D/g, "");
-    if (cpfnum.length !== 11){
-        console.log("inválido");
-    }
-
-    let repetir = true;
-    for (let i = 0; i < cpf.length -1; i++){
-        if (cpf[i] !== cpf[i + 1]) {
-            repetir = false
-            break;
-        }
-        else{
-            console.log("inválido")
+    
+    while(true){
+        let cpfnum = cpf.replace(/\D/g, "");
+        if (cpfnum.length !== 11){
+            console.log("inválido"); 
+            return false
         }
 
-    let soma = 0
-    for (let i = 0; i < 9; i++){
-        soma+= parseInt(cpf[i]) * (10 - i)
+        let repetidos= 0;
+        for (let i = 0; i <= cpfnum.length ; i++){
+            if (cpfnum[i] === cpfnum[i + 1]) {
+                repetidos++
+            }
+        }
+        
+        if(repetidos>=9){
+            console.log("CPF inválido") 
+            return false
+        }
+        let soma = 0
+        for (let i = 0; i < 9; i++){   
+        soma+= parseInt(cpfnum[i]) * (10 - i)
     }
+        
+        resultado=(soma * 10 )% 11
+        if(resultado===10){
+            resultado=0
+        }
 
-    let verificar; 
-    if (soma % 11 < 2){
-        verificar = 0
-    } else{
-        verificar = 11 - (soma % 11);
+        if ( resultado !== parseInt(cpfnum[9])){
+            console.log("CPF inválido") //verificação primeiro digito
+            return false
+        } 
+
+        let somaSegDigito = 0
+    for (let i = 0; i < 10; i++){   
+        somaSegDigito+= parseInt(cpfnum[i]) * (11 - i)
     }
+    console.log(somaSegDigito)
+    resultSegDigito=(somaSegDigito * 10 )% 11
+        if(resultSegDigito===10){
+            resultado=0
+        }
 
-    if (parseInt(cpf[10]) !== verificar) {
-        console.log("inválido");
+        if ( resultSegDigito !== parseInt(cpfnum[10])){
+            console.log("CPF invalido") //verificação segundo digito
+            return false
+        } else{
+            console.log("CPF válido:  " + cpf )
+            return false  
+        }
     }
-
-    console.log("valido!");
 }
 
-let numeroCPF = "245.487.057-80";
-let resultadoCPF = validarCPF(numeroCPF)
-if (resultadoCPF = true){
-    console.log("CPF válido");
-} else {
-    console.log("CPF inválido");
-  }
-}
+let numeroCPF = "529.982.247-25";
+validarCPF(numeroCPF);
